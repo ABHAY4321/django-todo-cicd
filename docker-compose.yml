@@ -4,7 +4,7 @@ services:
   #django_todo_app:
     container_name: "django_todo_app"
     #build: .
-    image: pinku9627/django-todo-app:v2
+    image: pinku9627/django-todo-app:v3
     #image: django-todo-app-second-trial:latest
     ports:
       - 8000:8000
