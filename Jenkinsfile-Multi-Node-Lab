@@ -15,18 +15,18 @@ pipeline {
         stage("Build & Test Image"){
             steps {
                 echo "Building and testing the image"
-                sh "docker build -t django-todo-app:v2 ."
+                sh "docker build -t django-todo-app:v3 ."
             }
         }
         stage("Push Image to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker image tag django-todo-app:v2 ${env.dockerHubUser}/django-todo-app:v2"
+                sh "docker image tag django-todo-app:v3 ${env.dockerHubUser}/django-todo-app:v3"
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker image push ${env.dockerHubUser}/django-todo-app:v2"
-                sh "docker image rm django-todo-app:v2"
-                sh "docker image rm ${env.dockerHubUser}/django-todo-app:v2"
+                sh "docker image push ${env.dockerHubUser}/django-todo-app:v3"
+                sh "docker image rm django-todo-app:v3"
+                sh "docker image rm ${env.dockerHubUser}/django-todo-app:v3"
                 }
             }
         }
